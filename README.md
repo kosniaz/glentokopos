@@ -7,3 +7,4 @@ https://forms.gle/KXAAwEkAgBBTuRBn8
 
 app url
 https://glentokopos.herokuapp.com
+u
