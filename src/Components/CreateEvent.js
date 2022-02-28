@@ -26,22 +26,22 @@ function CreateEvent(props){
     }
 
     return(
-        <div>
-            <h1> Νέα Συναυλία</h1>
+        <div className = "card form-container container">
+            <h1>Νέα Συναυλία</h1>
             <div className = "form">
-                <form onSubmit = {handleSubmit}>
-                    <input type = "text" placeholder = "Καλλιτέχνες" name = "artists"/>
-                    <input type = "text" placeholder = "Τίτλος" name = "title"/>
-                    <input type = "text" placeholder = "Τοποθεσία" name = "location"/>
-                    <input type = "date" placeholder = "Ημερομηνία" name = "date"/>
-                    <input type = "text" placeholder = "Νομός" name = "prefecture"/>
-                    {/* <input type = "radio" placeholder = "Νομός" name = "prefecture">
-                        <label>Χανιά</label>
-                        <label>Ρέθυμνο</label>
-                        <label>Ηράκλειο</label>
-                        <label>Λασίθι</label>
-                    </input> */}
-                    <button>Υποβολή</button>
+                <form className="event-form" onSubmit = {handleSubmit}>
+                    <div className = "form-group form-control form-control-lg"><input className="border-0" type = "text" placeholder = "Καλλιτέχνες" name = "artists"/></div>
+                    <div className = "form-group form-control form-control-lg"><input className="border-0" type = "text" placeholder = "Τίτλος" name = "title"/></div>
+                    <div className = "form-group form-control form-control-lg"><input className="border-0" type = "text" placeholder = "Τοποθεσία" name = "location"/></div>
+                    <div className = "form-group form-control form-control-lg"><input className="fw-light border-0 col-md-12" type = "date" placeholder = "Ημερομηνία" name = "date"/></div>
+                    <div className = "form-group"><select className="form-control form-control-lg fw-light" name = "prefecture">
+                        <option selected disabled >Νομός</option>
+                        <option value="Χανιά">Χανιά</option>
+                        <option value="Ρέθυμνο">Ρέθυμνο</option>
+                        <option value="Ηράκλειο">Ηράκλειο</option>
+                        <option value="Λασίθι">Λασίθι</option>
+                    </select></div>
+                    <div className = "form-group text-center"><button className='btn btn-lg btn-outline-dark'>Υποβολή</button></div>
                 </form>
             </div>
         </div>

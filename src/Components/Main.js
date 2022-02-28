@@ -9,22 +9,22 @@ class Main extends Component{
         super()
         this.state = {
             posts:[{
-                id: 0,
-                Artists: "",
-                Title: "",
-                Location: "",
-                Date: "",
-                Prefecture: "",
+                // id: 0,
+                // Artists: "",
+                // Title: "",
+                // Location: "",
+                // Date: "",
+                // Prefecture: "",
             }]
         }
     }
     createEvent(eventSubmitted){
-        console.log(eventSubmitted.title)
+        console.log(eventSubmitted)
         this.setState((state) => ({
             posts: state.posts.concat([eventSubmitted])
         }))
     }
-    
+
     render(){
         console.log(this.state.posts)
         return(

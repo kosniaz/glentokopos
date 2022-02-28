@@ -1,0 +1,24 @@
+/* Input form */
+.form-container{
+    align-items: center;
+    width: 50vw;
+    border: none;
+    margin-top: 4rem;
+}
+.form{
+    margin-top:2rem;
+}
+.form-group{
+    margin-top: 1.5rem;
+}
+.body{
+    font-family: "eb_garamond12_regular"!important;
+}
+
+@font-face {
+    font-family: "eb_garamond12_regular"!important;
+    src: url("../Fonts/ebgaramond12-regular-webfont.woff2") format('woff2'),
+         url("../Fonts/ebgaramond12-regular-webfont.woff") format('woff')!important;
+    font-style:normal!important;
+
+}
