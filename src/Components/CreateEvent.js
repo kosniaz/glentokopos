@@ -41,6 +41,7 @@ function CreateEvent(props){
                         <label>Ηράκλειο</label>
                         <label>Λασίθι</label>
                     </input> */}
+                    <button>Υποβολή</button>
                 </form>
             </div>
         </div>

@@ -18,7 +18,7 @@ class Main extends Component{
         }
     }
     createEvent(eventSubmitted){
-        this.console.log(eventSubmitted.title)
+        console.log(eventSubmitted.title)
         this.setState((state) => ({
             posts: state.posts.concat([eventSubmitted])
         }))
@@ -35,7 +35,7 @@ class Main extends Component{
                 }/>
                 <Route path="/CreateEvent" element = {
                     <div>
-                        <CreateEvent onCreateEvent = {(addedPost) => CreateEvent(addedPost)}/>
+                        <CreateEvent onCreateEvent = {(addedPost) =>this.createEvent(addedPost)}/>
                     </div>
                 }/>
             </Routes>
