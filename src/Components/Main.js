@@ -1,6 +1,7 @@
-import React, {Component, useState} from 'react';
-import CreateEvent from './CreateEvent';
+import React, {Component, useState} from 'react'
+import CreateEvent from './CreateEvent'
 import Title from './Title'
+import SignIn from './SignIn'
 import {Route, Routes} from 'react-router-dom';
 
 class Main extends Component{
@@ -31,6 +32,7 @@ class Main extends Component{
                 <Route path="/" element = {
                     <div>
                         <Title title = {['Γλεντοκόπος!']}/>
+                        <SignIn/>
                     </div>
                 }/>
                 <Route path="/CreateEvent" element = {
