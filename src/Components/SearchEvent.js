@@ -27,26 +27,27 @@ function SearchEvent(props){
         return yyyy + "-" + mm + "-" + dd;
     };
 
-    // let selections = props.state.map(name => )
+    // Set array for options in Select and sort alphabeticaly
     var selectionList = [];
-    var selections = (props.posts.map(obj => obj.Artists))
+    var selections = (props.posts.map(obj => obj.Artists)).sort();
     selections.forEach(function(element) {
         selectionList.push({ label:element, value: element })
     });
-
-    console.log(selectionList)
 
     return(
         <div className = "card form-container container">
             <h1>Βρες αυτό που ψάχνεις</h1>
             <div className = "form">
                 <form className="event-form" onSubmit = {handleSearch}>
+                    {/* Artist search */}
                     <div className = "form-group form-control form-control-lg"><Select options={selectionList} className="border-0 col-md-12" placeholder = "Καλλιτέχνες" name = "artists" type=""/></div>
+                    {/* Date Search */}
                     <div className = "form-group form-control form-control-lg">
                         <input className="fw-light border-0 col-md-12" type = "date" placeholder = "Ημερομηνία" name = "date" min={disablePastDate()}/>
                     </div>
-                    <div className = "form-group"><select className="form-control form-control-lg fw-light" name = "prefecture">
-                        <option selected disabled >Νομός</option>
+                    {/* prefecture search */}
+                    <div className = "form-group"><select value="Νομός" className="form-control form-control-lg fw-light" name = "prefecture">
+                        <option value="Νομός" disabled >Νομός</option>
                         <option value="Χανιά">Χανιά</option>
                         <option value="Ρέθυμνο">Ρέθυμνο</option>
                         <option value="Ηράκλειο">Ηράκλειο</option>
@@ -59,7 +60,8 @@ function SearchEvent(props){
     )
 }
 
-// CreateEvent.propTypes = {
-//     onSearchEvent: PropTypes.func.isRequired
-// }
+SearchEvent.propTypes = {
+    posts: PropTypes.array.isRequired,
+    onSearchEvent: PropTypes.func.isRequired
+}
 export default SearchEvent
