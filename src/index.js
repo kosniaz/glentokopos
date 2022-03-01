@@ -5,6 +5,8 @@ import {BrowserRouter} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Styles/stylesheet.css'
 import MetaEditor from './Components/MetaEditor'
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 
 
 ReactDOM.render(

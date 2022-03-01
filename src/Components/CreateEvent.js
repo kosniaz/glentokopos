@@ -41,7 +41,7 @@ function CreateEvent(props){
                         <option value="Ηράκλειο">Ηράκλειο</option>
                         <option value="Λασίθι">Λασίθι</option>
                     </select></div>
-                    <div className = "form-group text-center"><button className='btn btn-lg btn-outline-dark'>Υποβολή</button></div>
+                    <div className = "form-group text-center"><button className='btn btn-lg btn-outline-dark mt-3'>Υποβολή</button></div>
                 </form>
             </div>
         </div>

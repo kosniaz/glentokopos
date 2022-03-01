@@ -2,8 +2,12 @@
 .form-container{
     align-items: center;
     width: 50vw;
-    border: none;
+    border: none!important;
     margin-top: 4rem;
+}
+
+.form-container h1{
+    font-size: 3rem ;
 }
 .form{
     margin-top:2rem;
