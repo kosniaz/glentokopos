@@ -1,16 +1,15 @@
+// SignUp page redirecting to new event page
+
 import React from 'react';
-import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 function SignIn(){
-    let navigate = useNavigate();
-    function handleClick(){
-        navigate('/CreateEvent')
-    }
+    // let navigate = useNavigate();
+    // function handleSubmit(){
+    //     navigate('/CreateEvent')
+    // }
     return(
-        <div>
-            <button onClick = {handleClick} > Sign In </button>
-        </div>
+        <div>Sign In Page</div>
     )
 }
 

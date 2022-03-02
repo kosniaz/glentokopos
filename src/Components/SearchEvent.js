@@ -46,7 +46,7 @@ function SearchEvent(props){
                         <input className="fw-light border-0 col-md-12" type = "date" placeholder = "Ημερομηνία" name = "date" min={disablePastDate()}/>
                     </div>
                     {/* prefecture search */}
-                    <div className = "form-group"><select value="Νομός" className="form-control form-control-lg fw-light" name = "prefecture">
+                    <div className = "form-group"><select defaultValue="Νομός" className="form-control form-control-lg fw-light" name = "prefecture">
                         <option value="Νομός" disabled >Νομός</option>
                         <option value="Χανιά">Χανιά</option>
                         <option value="Ρέθυμνο">Ρέθυμνο</option>

@@ -1,9 +1,11 @@
-import React, {Component, useState} from 'react'
+import React, {Component} from 'react'
 import CreateEvent from './CreateEvent'
 import Title from './Title'
-import SignIn from './SignIn'
+import SignButtons from './SignButtons'
 import {Route, Routes} from 'react-router-dom';
 import SearchEvent from './SearchEvent';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 
 class Main extends Component{
     constructor(){
@@ -40,6 +42,14 @@ class Main extends Component{
                 Location: "Καστέλι",
                 Date: "2022-01-11",
                 Prefecture: "Χανιά",
+            }],
+
+            users: [{
+                id:0,
+                Name:"",
+                Email:"",
+                Password:"",
+                Avatar:""
             }]
         }
     }
@@ -50,24 +60,40 @@ class Main extends Component{
         }))
     }
 
+    createUser(userSubmitted){
+        console.log(userSubmitted)
+        this.setState((state) => ({
+            users: state.users.concat([userSubmitted])
+        }))
+    }
     searchEvent(criteria){
         console.log(criteria)
     }
 
     render(){
         console.log(this.state.posts)
+        console.log(this.state.users)
         return(
             <Routes>
                 <Route path="/" element = {
                     <div>
                         <Title title = {['Γλεντοκόπος!']}/>
                         <SearchEvent onSearchEvent = {(searchCriteria) =>this.searchEvent(searchCriteria)} posts={this.state.posts}/>
-                        <SignIn/>
+                        <SignButtons/>
                     </div>
                 }/>
                 <Route path="/CreateEvent" element = {
                     <div>
                         <CreateEvent onCreateEvent = {(addedPost) =>this.createEvent(addedPost)}/>
+                    </div>
+                }/>
+                <Route path="/SignIn" element = {
+                    <div>
+                        <SignIn/>
+                    </div>
+                }/><Route path="/SignUp" element = {
+                    <div>
+                        <SignUp onCreateUser = {(addedUser) =>this.createUser(addedUser)}/>
                     </div>
                 }/>
             </Routes>
