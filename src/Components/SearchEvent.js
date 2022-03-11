@@ -36,7 +36,7 @@ function SearchEvent(props){
 
     return(
         <div className = "card form-container container">
-            <h1>Βρες αυτό που ψάχνεις</h1>
+            <h1>Βρες μια συναυλία</h1>
             <div className = "form">
                 <form className="event-form" onSubmit = {handleSearch}>
                     {/* Artist search */}
@@ -47,13 +47,13 @@ function SearchEvent(props){
                     </div>
                     {/* prefecture search */}
                     <div className = "form-group"><select defaultValue="Νομός" className="form-control form-control-lg fw-light" name = "prefecture">
-                        <option value="Νομός" disabled >Νομός</option>
+                        <option value="null">Νομός</option>
                         <option value="Χανιά">Χανιά</option>
                         <option value="Ρέθυμνο">Ρέθυμνο</option>
                         <option value="Ηράκλειο">Ηράκλειο</option>
                         <option value="Λασίθι">Λασίθι</option>
                     </select></div>
-                    <div className = "form-group text-center"><button className='btn btn-lg btn-outline-dark mt-3'>Υποβολή</button></div>
+                    <div className = "form-group text-center"><button className='btn btn-lg btn-outline-dark mt-3'>Αναζήτηση</button></div>
                 </form>
             </div>
         </div>

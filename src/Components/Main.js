@@ -1,11 +1,9 @@
 import React, {Component} from 'react'
 import CreateEvent from './CreateEvent'
 import Title from './Title'
-import SignButtons from './SignButtons'
+import CreateButton from './CreateButton'
 import {Route, Routes} from 'react-router-dom';
 import SearchEvent from './SearchEvent';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
 
 class Main extends Component{
     constructor(){
@@ -79,7 +77,7 @@ class Main extends Component{
                     <div>
                         <Title title = {['Γλεντοκόπος!']}/>
                         <SearchEvent onSearchEvent = {(searchCriteria) =>this.searchEvent(searchCriteria)} posts={this.state.posts}/>
-                        <SignButtons/>
+                        <CreateButton/>
                     </div>
                 }/>
                 <Route path="/CreateEvent" element = {
@@ -87,7 +85,8 @@ class Main extends Component{
                         <CreateEvent onCreateEvent = {(addedPost) =>this.createEvent(addedPost)}/>
                     </div>
                 }/>
-                <Route path="/SignIn" element = {
+                {/* Section for Sign In & Sign Up */}
+                {/* <Route path="/SignIn" element = {
                     <div>
                         <SignIn/>
                     </div>
@@ -95,7 +94,7 @@ class Main extends Component{
                     <div>
                         <SignUp onCreateUser = {(addedUser) =>this.createUser(addedUser)}/>
                     </div>
-                }/>
+                }/> */}
             </Routes>
         )
     }
