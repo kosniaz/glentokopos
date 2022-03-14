@@ -11,7 +11,7 @@ class Main extends Component{
         this.state = {
             posts:[{
                 id: 0,
-                Artists: "Μαρούλης, Κατσουλιέρης",
+                Artists: "",
                 Title: "Χοροεσπερίδα Μαργαρίτες",
                 Location: "μαργαρίτες",
                 Date: "2022-08-15",
@@ -19,7 +19,7 @@ class Main extends Component{
             },
             {
                 id: 0,
-                Artists: "Λεοντίδης, Φιλιππάκης",
+                Artists: "",
                 Title: "Βραδιά εν πλω στο Αρκάδι",
                 Location: "Πλοίο Αρκάδι",
                 Date: "2022-09-06",
@@ -27,7 +27,7 @@ class Main extends Component{
             },
             {
                 id: 0,
-                Artists: "Tumani Diabate",
+                Artists: "",
                 Title: "African harp evening",
                 Location: "Mπali",
                 Date: "2022-12-12",
@@ -35,19 +35,36 @@ class Main extends Component{
             },
             {
                 id: 0,
-                Artists: "Πεπε",
+                Artists: "",
                 Title: "καντο καντο",
                 Location: "Καστέλι",
                 Date: "2022-01-11",
                 Prefecture: "Χανιά",
             }],
 
-            users: [{
-                id:0,
-                Name:"",
-                Email:"",
-                Password:"",
-                Avatar:""
+            artists:[{
+                Artist:"Λεοντίδης",
+                id:"1"
+            },
+            {
+                Artist: "Φιλιππάκης",
+                id:"2"   
+            },
+            {
+                Artist:"Μαρούλης",
+                id:"3"
+            },
+            {
+                Artist:"Κατσουλιέρης",
+                id:"4"
+            },
+            {
+                Artist: "Tumani Diabate",
+                id:"5"   
+            },
+            {
+                Artist:"Πεπε",
+                id:"6"
             }]
         }
     }
@@ -56,33 +73,45 @@ class Main extends Component{
         this.setState((state) => ({
             posts: state.posts.concat([eventSubmitted])
         }))
+        
+
+        // Add new entries to artists' table
+        eventSubmitted.artists.map(obj => { 
+            if(obj.__isNew__){this.setState((state) => ({
+                artists: state.artists.concat([{Artist: obj.value, id: "34"}])
+                
+            }))
+        //if works, concat doesn't
+            console.log(this.state.artists)
+        }
+        })
     }
 
-    createUser(userSubmitted){
-        console.log(userSubmitted)
-        this.setState((state) => ({
-            users: state.users.concat([userSubmitted])
-        }))
-    }
+    // createUser(userSubmitted){
+    //     console.log(userSubmitted)
+    //     this.setState((state) => ({
+    //         users: state.users.concat([userSubmitted])
+    //     }))
+    // }
     searchEvent(criteria){
         console.log(criteria)
     }
 
     render(){
         console.log(this.state.posts)
-        console.log(this.state.users)
+        // console.log(this.state.users)
         return(
             <Routes>
                 <Route path="/" element = {
                     <div>
                         <Title title = {['Γλεντοκόπος!']}/>
-                        <SearchEvent onSearchEvent = {(searchCriteria) =>this.searchEvent(searchCriteria)} posts={this.state.posts}/>
+                        <SearchEvent onSearchEvent = {(searchCriteria) =>this.searchEvent(searchCriteria)} artists={this.state.artists}/>
                         <CreateButton/>
                     </div>
                 }/>
                 <Route path="/CreateEvent" element = {
                     <div>
-                        <CreateEvent onCreateEvent = {(addedPost) =>this.createEvent(addedPost)}/>
+                        <CreateEvent onCreateEvent = {(addedPost) =>this.createEvent(addedPost)} artists={this.state.artists} />
                     </div>
                 }/>
                 {/* Section for Sign In & Sign Up */}

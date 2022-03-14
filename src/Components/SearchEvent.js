@@ -3,9 +3,10 @@ import Select from 'react-select';
 import PropTypes from 'prop-types';
 
 function SearchEvent(props){
+    var artistsState = [];
     function handleSearch(event){
         event.preventDefault();
-        const artists = event.target.elements.artists.value
+        const artists = artistsState
         const date = event.target.elements.date.value
         const prefecture = event.target.elements.prefecture.value
         if(artists && date && prefecture){
@@ -29,10 +30,15 @@ function SearchEvent(props){
 
     // Set array for options in Select and sort alphabeticaly
     var selectionList = [];
-    var selections = (props.posts.map(obj => obj.Artists)).sort();
+    var selections = (props.artists.map(obj => obj.Artist)).sort();
     selections.forEach(function(element) {
         selectionList.push({ label:element, value: element })
     });
+    
+    // Set artist selection to search for
+    function handleChange(selectedArtists){
+        artistsState = selectedArtists;
+    }
 
     return(
         <div className = "card form-container container">
@@ -40,7 +46,7 @@ function SearchEvent(props){
             <div className = "form">
                 <form className="event-form" onSubmit = {handleSearch}>
                     {/* Artist search */}
-                    <div className = "form-group form-control form-control-lg"><Select options={selectionList} className="border-0 col-md-12" placeholder = "Καλλιτέχνες" name = "artists" type=""/></div>
+                    <div className = "form-group form-control form-control-lg"><Select isMulti options={selectionList} className="border-0 col-md-12" placeholder = "Καλλιτέχνες" name = "artists" type="" onChange={handleChange}/></div>
                     {/* Date Search */}
                     <div className = "form-group form-control form-control-lg">
                         <input className="fw-light border-0 col-md-12" type = "date" placeholder = "Ημερομηνία" name = "date" min={disablePastDate()}/>
@@ -61,7 +67,7 @@ function SearchEvent(props){
 }
 
 SearchEvent.propTypes = {
-    posts: PropTypes.array.isRequired,
+    artists: PropTypes.array.isRequired,
     onSearchEvent: PropTypes.func.isRequired
 }
 export default SearchEvent
