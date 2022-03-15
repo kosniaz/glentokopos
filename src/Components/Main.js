@@ -68,23 +68,31 @@ class Main extends Component{
             }]
         }
     }
+    
     createEvent(eventSubmitted){
-        console.log(eventSubmitted)
+
+        // Add new entries to events' table
         this.setState((state) => ({
             posts: state.posts.concat([eventSubmitted])
         }))
-        
 
         // Add new entries to artists' table
         eventSubmitted.artists.map(obj => { 
-            if(obj.__isNew__){this.setState((state) => ({
-                artists: state.artists.concat([{Artist: obj.value, id: "34"}])
-                
-            }))
-        //if works, concat doesn't
-            console.log(this.state.artists)
-        }
+            if(obj.__isNew__){
+                console.log(obj.value);
+                const eachnew = {
+                    Artist: obj.value,
+                    id: Number(new Date())}
+                console.log(eachnew)
+                this.setState((state) => ({
+                    posts: ([eventSubmitted]),
+                    artists: state.artists.concat([eachnew])
+                }))
+            }
         })
+        
+        console.log("Artists")
+        console.log(this.state.artists)
     }
 
     // createUser(userSubmitted){
@@ -98,7 +106,7 @@ class Main extends Component{
     }
 
     render(){
-        console.log(this.state.posts)
+        //console.log(this.state.posts)
         // console.log(this.state.users)
         return(
             <Routes>
@@ -128,5 +136,4 @@ class Main extends Component{
         )
     }
 }
-
 export default Main
