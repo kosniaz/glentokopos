@@ -11,7 +11,7 @@ class Main extends Component{
         this.state = {
             posts:[{
                 id: 0,
-                Artists: "",
+                Artists: "Λεοντίδης, Φιλιππάκης",
                 Title: "Χοροεσπερίδα Μαργαρίτες",
                 Location: "μαργαρίτες",
                 Date: "2022-08-15",
@@ -19,7 +19,7 @@ class Main extends Component{
             },
             {
                 id: 0,
-                Artists: "",
+                Artists: "Μαρούλης, Κατσουλιέρης",
                 Title: "Βραδιά εν πλω στο Αρκάδι",
                 Location: "Πλοίο Αρκάδι",
                 Date: "2022-09-06",
@@ -27,7 +27,7 @@ class Main extends Component{
             },
             {
                 id: 0,
-                Artists: "",
+                Artists: "Tumani Diabate",
                 Title: "African harp evening",
                 Location: "Mπali",
                 Date: "2022-12-12",
@@ -35,7 +35,7 @@ class Main extends Component{
             },
             {
                 id: 0,
-                Artists: "",
+                Artists: "Πεπε",
                 Title: "καντο καντο",
                 Location: "Καστέλι",
                 Date: "2022-01-11",
@@ -90,9 +90,6 @@ class Main extends Component{
                 }))
             }
         })
-        
-        console.log("Artists")
-        console.log(this.state.artists)
     }
 
     // createUser(userSubmitted){
@@ -101,13 +98,19 @@ class Main extends Component{
     //         users: state.users.concat([userSubmitted])
     //     }))
     // }
+
     searchEvent(criteria){
-        console.log(criteria)
+    // Search by artist - can search only by one artist, needs map() 
+        var resultslist = this.state.posts.filter(
+            obj=> obj.Artists.includes(
+                criteria.artists.map(
+                    obj => obj.value)
+            )
+        )
+        console.log(resultslist)
     }
 
     render(){
-        //console.log(this.state.posts)
-        // console.log(this.state.users)
         return(
             <Routes>
                 <Route path="/" element = {
@@ -122,6 +125,7 @@ class Main extends Component{
                         <CreateEvent onCreateEvent = {(addedPost) =>this.createEvent(addedPost)} artists={this.state.artists} />
                     </div>
                 }/>
+
                 {/* Section for Sign In & Sign Up */}
                 {/* <Route path="/SignIn" element = {
                     <div>
@@ -132,6 +136,7 @@ class Main extends Component{
                         <SignUp onCreateUser = {(addedUser) =>this.createUser(addedUser)}/>
                     </div>
                 }/> */}
+                
             </Routes>
         )
     }

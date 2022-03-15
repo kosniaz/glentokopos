@@ -9,7 +9,7 @@ function SearchEvent(props){
         const artists = artistsState
         const date = event.target.elements.date.value
         const prefecture = event.target.elements.prefecture.value
-        if(artists && date && prefecture){
+        if(artists.length || date != "" || prefecture != ""){
             const criteria = {
                 artists: artists,
                 date: date,
@@ -37,7 +37,7 @@ function SearchEvent(props){
     
     // Set artist selection to search for
     function handleChange(selectedArtists){
-        artistsState = selectedArtists;
+        artistsState = selectedArtists
     }
 
     return(
@@ -53,7 +53,7 @@ function SearchEvent(props){
                     </div>
                     {/* prefecture search */}
                     <div className = "form-group"><select defaultValue="Νομός" className="form-control form-control-lg fw-light" name = "prefecture">
-                        <option value="null">Νομός</option>
+                        <option value="">Νομός</option>
                         <option value="Χανιά">Χανιά</option>
                         <option value="Ρέθυμνο">Ρέθυμνο</option>
                         <option value="Ηράκλειο">Ηράκλειο</option>
