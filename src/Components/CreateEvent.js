@@ -2,6 +2,7 @@ import React from 'react';
 import Creatable from 'react-select/creatable';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+// import Select from 'react-select/dist/declarations/src/Select';
 
 function CreateEvent(props){
     var artistsState = [{
@@ -28,7 +29,7 @@ function CreateEvent(props){
         
        // console.log(post)
         if(title && location && date && prefecture){
-            props.onCreateEvent(post)
+            props.addingPost(post)
             navigate('/')
         }
     }
@@ -45,19 +46,22 @@ function CreateEvent(props){
         return yyyy + "-" + mm + "-" + dd;
     };
 
-    // Set array for options in Select and sort alphabeticaly
-    var selectionList = [];
-    var selections = (props.artists.map(obj => obj.Artist)).sort();
-    selections.forEach(function(element) {
-        selectionList.push({ label:element, value: element })
-    });
 
+    // Define artists' dropdown content 
+    //          ***
+    //          ***     NEEDS SORTING, REMOVAL OF DOUBLETYPES AND LOWCASE LETTERS 
+    //          ***
+    var selections =[]
+    Object.entries(props.posts).forEach(([key, value]) => selections.push(Object.entries(value.artists).map(element => element.pop())))
+    let selectionList = selections.reduce((a, b) => [...a, ...b], [])
+    
+    
     // Set artist selection to search for
     function handleChange(selectedArtists){
-        artistsState = selectedArtists;
-        console.log(selectedArtists)
+        artistsState = selectedArtists
     }
 
+ 
     return(
         <div className = "card form-container container">
             <h1>Νέα Συναυλία</h1>
@@ -84,7 +88,5 @@ function CreateEvent(props){
     )
 }
 
-CreateEvent.propTypes = {
-    onCreateEvent: PropTypes.func.isRequired
-}
+
 export default CreateEvent

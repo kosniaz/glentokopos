@@ -29,12 +29,13 @@ function SearchEvent(props){
     };
 
     // Set array for options in Select and sort alphabeticaly
-    var selectionList = [];
-    var selections = (props.artists.map(obj => obj.Artist)).sort();
-    selections.forEach(function(element) {
-        selectionList.push({ label:element, value: element })
-    });
-    
+    //          ***
+    //          ***     NEEDS SORTING, REMOVAL OF DOUBLETYPES AND LOWCASE LETTERS 
+    //          ***
+    var selections =[]
+    Object.entries(props.posts).forEach(([key, value]) => selections.push(Object.entries(value.artists).map(element => element.pop())))
+    let selectionList = selections.reduce((a, b) => [...a, ...b], [])
+
     // Set artist selection to search for
     function handleChange(selectedArtists){
         artistsState = selectedArtists
@@ -66,8 +67,4 @@ function SearchEvent(props){
     )
 }
 
-SearchEvent.propTypes = {
-    artists: PropTypes.array.isRequired,
-    onSearchEvent: PropTypes.func.isRequired
-}
 export default SearchEvent
