@@ -63,7 +63,6 @@ class Main extends Component{
      
 
     render(){
-        console.log(this.props.posts)
         return(
             <Routes>
                 <Route path="/" element = {

@@ -5,10 +5,7 @@ import PropTypes from 'prop-types';
 // import Select from 'react-select/dist/declarations/src/Select';
 
 function CreateEvent(props){
-    var artistsState = [{
-            name:"",
-            id:""
-        }];
+    var artistsState = [];
     let navigate = useNavigate();
     function handleSubmit(event){
         event.preventDefault();
@@ -27,7 +24,6 @@ function CreateEvent(props){
             prefecture: prefecture,
         }
         
-       // console.log(post)
         if(title && location && date && prefecture){
             props.addingPost(post)
             navigate('/')
@@ -45,23 +41,29 @@ function CreateEvent(props){
         const yyyy = today.getFullYear();
         return yyyy + "-" + mm + "-" + dd;
     };
+    
+    //Capitalize first letter of each name and make others lowercase
+    function fixCase(str){
+        let lowercasename = str.toString().toLowerCase()
+        return lowercasename.charAt(0).toUpperCase() + lowercasename.slice(1);
+    }
 
-
-    // Define artists' dropdown content 
+    // Define artists' dropdown content & remove duplicates
     //          ***
-    //          ***     NEEDS SORTING, REMOVAL OF DOUBLETYPES AND LOWCASE LETTERS 
+    //          ***     NEEDS REMOVAL OF DOUBLETYPES
     //          ***
     var selections =[]
     Object.entries(props.posts).forEach(([key, value]) => selections.push(Object.entries(value.artists).map(element => element.pop())))
-    let selectionList = selections.reduce((a, b) => [...a, ...b], [])
-    
-    
-    // Set artist selection to search for
+    let selectionList = (selections.reduce((a, b) => [...a, ...b], [])).sort((a, b) => a.value > b.value ? 1 : -1).filter((v,i,a)=>a.findIndex(t=>(t.value===v.value))===i)
+    console.log('List items:', selectionList)
+
+    // Set artist selection for event creation and fixcase of entries
     function handleChange(selectedArtists){
+        selectedArtists.map(obj => {obj.label = fixCase(obj.label); obj.value = fixCase(obj.value)})
         artistsState = selectedArtists
     }
 
- 
+
     return(
         <div className = "card form-container container">
             <h1>Νέα Συναυλία</h1>
