@@ -20,11 +20,9 @@ function SearchEvent(props){
 
     //Perform Search
     function PerformSearch(criteria){
-        console.log(criteria)
         let eventList = props.posts
         var resultslist = []
         if(criteria.artists.length > 0){
-console.log('Search By Artist')
             let searchedArtists = criteria.artists.map(obj => obj.value)
             //Search by artist
             eventList.map(event => {event.artists.map(artist=>{
@@ -69,7 +67,6 @@ console.log('Search By Artist')
         }
         //Search by date
         else if(criteria.date != ""){
-console.log('Search By Date')
             eventList.map(event => {
                 if (event.date == criteria.date){
                     //If date found search by date and prefecture
@@ -86,7 +83,6 @@ console.log('Search By Date')
         }        
         //Search by prefecture
         else{
-console.log('Search By Prefecture')
             eventList.map(event => {            
                 if(event.prefecture == criteria.prefecture){
                     resultslist.push(event)
@@ -112,8 +108,6 @@ console.log('Search By Prefecture')
     var selections =[]
     Object.entries(props.posts).forEach(([key, value]) => selections.push(Object.entries(value.artists).map(element => element.pop())))
     let selectionList = (selections.reduce((a, b) => [...a, ...b], [])).sort((a, b) => a.value > b.value ? 1 : -1).filter((v,i,a)=>a.findIndex(t=>(t.value===v.value))===i)
-    console.log('List items:', selectionList)
-
 
     // Set artist selection to search for
     function handleChange(selectedArtists){
