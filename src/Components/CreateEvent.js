@@ -1,8 +1,7 @@
 import React from 'react';
 import Creatable from 'react-select/creatable';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
-// import Select from 'react-select/dist/declarations/src/Select';
+
 
 function CreateEvent(props){
     var artistsState = [];
@@ -50,7 +49,7 @@ function CreateEvent(props){
 
     // Define artists' dropdown content & remove duplicates
     //          ***
-    //          ***     NEEDS REMOVAL OF DOUBLETYPES
+    //          ***  
     //          ***
     var selections =[]
     Object.entries(props.posts).forEach(([key, value]) => selections.push(Object.entries(value.artists).map(element => element.pop())))

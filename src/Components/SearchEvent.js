@@ -1,6 +1,5 @@
 import React from 'react';
 import Select from 'react-select';
-import PropTypes from 'prop-types';
 
 function SearchEvent(props){
     var artistsState = [];
@@ -15,8 +14,77 @@ function SearchEvent(props){
                 date: date,
                 prefecture: prefecture
             }
-            props.onSearchEvent(criteria)
+            PerformSearch(criteria)
         }
+    }
+
+
+    //Perform Search
+    function PerformSearch(criteria){
+        console.log(criteria)
+        let eventList = props.posts
+        var resultslist = []
+        if(criteria.artists.length > 0){
+console.log('Search By Artist')
+            let searchedArtists = criteria.artists.map(obj => obj.value)
+           
+            
+            //Search by artist
+            eventList.map(event => {event.artists.map(artist=>{
+                if (artist.value.includes(searchedArtists.map(artist => artist))){
+                    
+                    //If artist found search by date             
+                    if (criteria.date != ""){
+                        if (event.date == criteria.date){
+                            //If date found search by prefecture
+                            if (criteria.prefecture != ""){
+                                if(event.prefecture == criteria.prefecture){
+                                    resultslist.push(event)
+                                }
+                            }
+                            else{resultslist.push(event)}
+                        }
+                    }
+
+                    //If no date, search by artist and prefecture
+                    else if (criteria.prefecture != ""){
+                        if(event.prefecture == criteria.prefecture){
+                            resultslist.push(event)
+                        }
+                    }
+                    //If no date and no prefecture, search by artist
+                    else{resultslist.push(event)}
+                }
+            })})
+        }
+
+        //Search by date
+        else if(criteria.date != ""){
+console.log('Search By Date')
+            eventList.map(event => {
+                if (event.date == criteria.date){
+                    //If date found search by date and prefecture
+                    if (criteria.prefecture != ""){
+                        if(event.prefecture == criteria.prefecture){
+                            resultslist.push(event)
+                        }
+                    }
+                    //if no prefecture, search by date
+                    else{resultslist.push(event)}
+                }
+            })
+
+        }        
+        //Search by prefecture
+        else{
+console.log('Search By Prefecture')
+            eventList.map(event => {            
+                if(event.prefecture == criteria.prefecture){
+                    resultslist.push(event)
+                }
+            })
+        }
+        console.log('Search Results',resultslist)
     }
 
     // Disable calendar past dates
@@ -28,13 +96,17 @@ function SearchEvent(props){
         return yyyy + "-" + mm + "-" + dd;
     };
 
-    // Set array for options in Select and sort alphabeticaly
+
+
+    // Set array for options in Select, sort alphabeticaly and remove dublicates
     //          ***
-    //          ***     NEEDS SORTING, REMOVAL OF DOUBLETYPES AND LOWCASE LETTERS 
+    //          ***    
     //          ***
     var selections =[]
     Object.entries(props.posts).forEach(([key, value]) => selections.push(Object.entries(value.artists).map(element => element.pop())))
-    let selectionList = selections.reduce((a, b) => [...a, ...b], [])
+    let selectionList = (selections.reduce((a, b) => [...a, ...b], [])).sort((a, b) => a.value > b.value ? 1 : -1).filter((v,i,a)=>a.findIndex(t=>(t.value===v.value))===i)
+    console.log('List items:', selectionList)
+
 
     // Set artist selection to search for
     function handleChange(selectedArtists){
