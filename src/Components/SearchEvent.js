@@ -18,7 +18,6 @@ function SearchEvent(props){
         }
     }
 
-
     //Perform Search
     function PerformSearch(criteria){
         console.log(criteria)
@@ -27,37 +26,47 @@ function SearchEvent(props){
         if(criteria.artists.length > 0){
 console.log('Search By Artist')
             let searchedArtists = criteria.artists.map(obj => obj.value)
-           
-            
             //Search by artist
             eventList.map(event => {event.artists.map(artist=>{
-                if (artist.value.includes(searchedArtists.map(artist => artist))){
-                    
-                    //If artist found search by date             
-                    if (criteria.date != ""){
-                        if (event.date == criteria.date){
-                            //If date found search by prefecture
-                            if (criteria.prefecture != ""){
-                                if(event.prefecture == criteria.prefecture){
-                                    resultslist.push(event)
+                for(let i = 0; i < searchedArtists.length; i++){
+                    if (artist.value.includes(searchedArtists[i])){
+                        //If artist found search by date             
+                        if (criteria.date != ""){
+                            if (event.date == criteria.date){
+                                //If date found search by prefecture
+                                if (criteria.prefecture != ""){
+                                    if(event.prefecture == criteria.prefecture){
+                                        if(resultslist.map(event => event.id).includes(event.id)){
+                                            //Check if event already in resultslist due to second artist
+                                        }else{resultslist.push(event)}
+                                    }
+                                }
+                                else{
+                                    if(resultslist.map(event => event.id).includes(event.id)){
+                                        //Check if event already in resultslist due to second artist
+                                    }else{resultslist.push(event)}
                                 }
                             }
-                            else{resultslist.push(event)}
                         }
-                    }
 
-                    //If no date, search by artist and prefecture
-                    else if (criteria.prefecture != ""){
-                        if(event.prefecture == criteria.prefecture){
-                            resultslist.push(event)
+                        //If no date, search by artist and prefecture
+                        else if (criteria.prefecture != ""){
+                            if(event.prefecture == criteria.prefecture){
+                                if(resultslist.map(event => event.id).includes(event.id)){
+                                    //Check if event already in resultslist due to second artist
+                                }else{resultslist.push(event)}
+                            }
+                        }
+                        //If no date and no prefecture, search by artist
+                        else{
+                            if(resultslist.map(event => event.id).includes(event.id)){
+                                //Check if event already in resultslist due to second artist
+                            }else{resultslist.push(event)}
                         }
                     }
-                    //If no date and no prefecture, search by artist
-                    else{resultslist.push(event)}
                 }
             })})
         }
-
         //Search by date
         else if(criteria.date != ""){
 console.log('Search By Date')
@@ -95,8 +104,6 @@ console.log('Search By Prefecture')
         const yyyy = today.getFullYear();
         return yyyy + "-" + mm + "-" + dd;
     };
-
-
 
     // Set array for options in Select, sort alphabeticaly and remove dublicates
     //          ***
