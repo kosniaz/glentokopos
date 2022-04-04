@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 function SignButtons(){
     let navigate = useNavigate();
     function handleSignIn(){
-        navigate('/SignIn')
+        navigate('/signin')
     }
     function handleSignUp(){
-        navigate('/SignUp')
+        navigate('/register')
     }
     return(
         <div className ="container text-center mt-3">

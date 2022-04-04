@@ -4,63 +4,36 @@ import Title from './Title'
 import CreateButton from './CreateButton'
 import {Route, Routes} from 'react-router-dom';
 import SearchEvent from './SearchEvent';
+import Register from './Register';
+import SignIn from './SignIn';
+import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
+import SignButtons from './SignButtons';
 
 class Main extends Component{
     
-    // createEvent(eventSubmitted){
-
-    //     // Add new entries to events' table
-    //     this.setState((state) => ({
-    //         posts: state.posts.concat([eventSubmitted])
-    //     }))
-
-    //     // Add new entries to artists' table
-    //     // State doesn't update soon so search can't be completed maybe Navigation from other function is the problem 
-    //     eventSubmitted.artists.map(obj => { 
-    //         if(obj.__isNew__){
-    //             console.log(obj.value);
-    //             const eachnew = {
-    //                 Artist: obj.value,
-    //                 id: Number(new Date())}
-    //             console.log(eachnew)
-    //             this.setState((state) => ({
-    //                 posts: ([eventSubmitted]),
-    //                 artists: state.artists.concat([eachnew])
-    //             }))
-    //         }
-    //     })
-    // }
-
-    // // createUser(userSubmitted){
-    // //     console.log(userSubmitted)
-    // //     this.setState((state) => ({
-    // //         users: state.users.concat([userSubmitted])
-    // //     }))
-    // // }
-
-    // searchEvent(criteria){
-
-    // // Search by artist - return this values (criteria) to back end
-    //     let artistlist = criteria.artists.map(obj => obj.value)
-    //     let date = criteria.date
-    //     let prefecture = criteria.prefecture
-
-    //     console.log(artistlist, date, prefecture)        
-        
-    //     // Front end searching is bad idea due to big volume of fetching from database
-    //     // var resultslist = this.state.posts.filter(
-    //     //     obj=> obj.Artists.includes(
-    //     //         criteria.artists.map(obj => obj.value)
-    //     //     )
-    //     // )
-    //     // console.log(resultslist)
-
-    // }
     componentDidMount(){
         this.props.startLoadingPost()
     }
     
-     
+    login(){
+
+    }
+
+    
+    async onRegister(Email, Password){
+        let auth = getAuth();
+        try{
+            const newUser = await createUserWithEmailAndPassword(auth, Email, Password)
+            console.log(newUser)
+        }catch(error){
+            console.log(error.message);
+        }
+    }
+
+
+    logout(){
+
+    }
 
     render(){
         return(
@@ -69,25 +42,25 @@ class Main extends Component{
                     <div>
                         <Title title = {['Γλεντοκόπος!']}/>
                         <SearchEvent {...this.props}  table = {this.props.posts}/>
-                        <CreateButton/>
+                        <CreateButton/><SignButtons/>
                     </div>
                 }/>
-                <Route path="/CreateEvent" element = {
+                <Route path="/createvent" element = {
                     <div>
                         <CreateEvent {...this.props} table = {this.props.posts}  />
                     </div>
                 }/>
 
                 {/* Section for Sign In & Sign Up */}
-                {/* <Route path="/SignIn" element = {
+                <Route path="/signin" element = {
                     <div>
                         <SignIn/>
                     </div>
-                }/><Route path="/SignUp" element = {
+                }/><Route path="/register" element = {
                     <div>
-                        <SignUp onCreateUser = {(addedUser) =>this.createUser(addedUser)}/>
+                        <Register onCreateUser = {(Email, Password) =>this.onRegister(Email, Password)}/>
                     </div>
-                }/> */}
+                }/>
                 
             </Routes>
         )

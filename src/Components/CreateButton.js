@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 function CreateButton(){
     let navigate = useNavigate();
     function handleClick(){
-        navigate('/CreateEvent')
+        navigate('/createvent')
     }
     return(
         <div className ="container text-center mt-3">
